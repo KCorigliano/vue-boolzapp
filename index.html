@@ -20,7 +20,7 @@
                     <div class="sidebar-top">
                         <div class="contacts">
                             <img src="img/avatar_io.jpg" alt="my profile-pic">    
-                            <span>Kevin Corigliano</span>
+                            <p>Kevin Corigliano</p>
                         </div>
                         <div>
                             <i class="fas fa-circle-notch"></i>
@@ -39,13 +39,57 @@
                             </div>
                         </div>
                         <input type="text" placeholder="Cerca o inizia una nuova chat">
-                        <div class="contacts" v-for="(friend, i) in contacts">
+                        <div class="contacts sidebar-contacts" v-for="(friend, i) in contacts">
                             <img :src="'img/avatar' + friend.avatar + '.jpg'" alt="friend.name 'profile-pic'">
-                            <span>{{ friend.name}}</span>
+                            <p>{{ friend.name}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="main"></div>
+                <div class="main">
+                    <div class="main-top">
+                        <div class="contacts">
+                            <img src="img/avatar_1.jpg" alt="my profile-pic">
+                            <div>
+                                <p>Michele</p>
+                                <span>Ultimo accesso oggi alle</span>
+                            </div>    
+                        </div>
+                        <div>
+                            <i class="fas fa-search"></i>
+                            <i class="fas fa-paperclip"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
+                    </div>
+                    <div class="chat">
+                        <div class="message">
+                            <div class="my-message">
+                                <p>Hai portato a spasso il cane?</p>
+                                <span>10/01/2020 15:30:55</span>
+                            </div>
+                        </div>
+                        <div class="message">
+                            <div class="my-message">
+                                <p>Ricordati di dargli da mangiare</p>
+                                <span>10/01/2020 15:50:00</span>
+                            </div>
+                        </div>
+                        <div class="message">
+                            <div class="his-message">
+                                <p>Tutto fatto!</p>
+                                <span>10/01/2020 16:15:22</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-bottom">
+                        <div>
+                            <i class="far fa-smile"></i>
+                        </div>
+                        <input type="text" placeholder="Scrivi un messaggio">
+                        <div>
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

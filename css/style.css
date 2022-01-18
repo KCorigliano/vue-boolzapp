@@ -19,23 +19,43 @@
 }
 
 .chat-container{
+    display: flex;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: calc(100vh - 200px);
+    height: calc(100vh - 75px);
+    width: calc(100% - 250px);
 }
+
+img{
+    width: 50px;
+    border-radius: 50%;
+}
+
+.contacts{
+    display: flex;
+    align-items: center;
+}
+
+.contacts p{
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+/* -------------- SIDEBAR --------------- */
+/* -------------- From top to bottom ------------- */
 
 .sidebar{
     width: 350px;
     height: 100%;
 }
 
-.sidebar>div{
-    width: 100%;
+.sidebar-top{
+    width: 350px;
 }
 
-.sidebar-top{
+.sidebar-top {
     position: fixed;
     height: 75px;
     background-color: #ebebea;
@@ -47,6 +67,12 @@
 
 .sidebar-top>h5{
     justify-self: flex-start;
+}
+
+.sidebar-top i,
+.main-top i{
+    margin: 0 5px;
+    cursor: pointer;
 }
 
 .notify{
@@ -66,12 +92,7 @@
 
 .notify span{
     text-decoration: underline;
-}
-
-.sidebar-bottom{
-    padding-top: 75px;
-    background-color: #fbfafa;
-    height: 100%;
+    cursor: pointer;
 }
 
 .sidebar input{
@@ -83,14 +104,10 @@
     padding: 5px;
 }
 
-img{
-    width: 50px;
-    border-radius: 50%;
-}
-
-.contacts{
-    display: flex;
-    align-items: center;
+.sidebar-bottom{
+    padding-top: 75px;
+    background-color: #fbfafa;
+    height: 100%;
 }
 
 .sidebar-bottom .contacts{
@@ -100,4 +117,95 @@ img{
 
 .sidebar-bottom .contacts:hover{
     background-color: #e9eaeb;
+}
+
+.sidebar-contacts{
+    overflow-x: auto;
+}
+
+/* -------------- MAIN ------------- */
+/* -------------- From top to bottom ------------- */
+
+.main{
+    flex-grow: 1;
+    height: 100%;
+    position: relative;
+}
+
+.main-top{
+    margin-right: 0px;
+    height: 75px;
+    background-color: #ebebea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.main-top span{
+    color: grey;
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+.chat{
+    background: url(../img/mine.jpg);
+    height: calc(100% - 125px);
+    overflow-x: auto;
+}
+
+.message{
+    display: flex;
+}
+
+.my-message{
+    margin: 10px 10px 10px auto;
+    background-color: #d5f9ba;
+    border-radius: 7px 0px 7px 7px;
+    width: auto;
+    padding: 15px;
+}
+
+.his-message{
+    background-color: #ffffff;
+    border-radius: 0 7px 7px;
+    width: auto;
+    padding: 15px;
+    margin: 10px;
+}
+
+.my-message span,
+.his-message span{
+    margin: 0 0 0 auto;
+    font-size: 10px;
+    color: grey;
+}
+
+.main-bottom{
+    background-color: rgba(200, 200, 200, 0.5);
+    backdrop-filter: blur(50px);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    bottom: 0;
+    padding: 0 15px;
+}
+
+.main-bottom input{
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    width: 80%;
+    padding: 5px;
+}
+
+.main-bottom div{
+    flex-grow: 1;
+    text-align: center;
+}
+
+.main-bottom i{
+    cursor: pointer;
 }
