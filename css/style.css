@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    position: relative;
+}
+
+.container-top{
+    height: 150px;
+    background-color: #029787;
+}
+
+.container-bottom{
+    background-color: #d7dbd7;
+    height: calc(100vh - 150px);
+}
+
+.chat-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: calc(100vh - 200px);
+}
+
+.sidebar{
+    width: 350px;
+    height: 100%;
+}
+
+.sidebar>div{
+    width: 100%;
+}
+
+.sidebar-top{
+    position: fixed;
+    height: 75px;
+    background-color: #ebebea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.sidebar-top>h5{
+    justify-self: flex-start;
+}
+
+.notify{
+    background-color: #8edafc;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.notify .icon{
+    margin-right: 15px;
+    background-color: white;
+    color: #8edafc;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.notify span{
+    text-decoration: underline;
+}
+
+.sidebar-bottom{
+    padding-top: 75px;
+    background-color: #fbfafa;
+    height: 100%;
+}
+
+.sidebar input{
+    width: calc(100% - 30px);
+    height: 30px;
+    margin: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+img{
+    width: 50px;
+    border-radius: 50%;
+}
+
+.contacts{
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-bottom .contacts{
+    padding: 15px 15px;
+    cursor: pointer;
+}
+
+.sidebar-bottom .contacts:hover{
+    background-color: #e9eaeb;
+}
