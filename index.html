@@ -94,10 +94,10 @@
                     <div class="chat">
                         <div class="message" v-for="(message,index) in contacts[currentIndex].messages">
                             <div :class="message.status === 'sent' ? 'my-message' : 'his-message'"
-                                @click="hiddenMenuClick(currentIndex)">
-                                <div class="hidden-menu" v-if="message.visible === false">
+                                @click="message.submenu=!message.submenu">
+                                <div class="hidden-menu" v-if="message.submenu === true">
                                     <p>Message info</p>
-                                    <p>Delete message</p>
+                                    <p @click="deleteMessage(index, currentIndex)">Delete message</p>
                                 </div>
                                 <p>{{message.text}}</p>
                                 <span>{{message.date}}</span>
