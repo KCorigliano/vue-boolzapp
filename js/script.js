@@ -86,6 +86,10 @@ new Vue({
                 ],
             },
         ], 
-        
+
+        currentIndex: 0,        
+    },
+    methods:{
+
     }
 })

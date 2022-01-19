@@ -39,19 +39,19 @@
                             </div>
                         </div>
                         <input type="text" placeholder="Cerca o inizia una nuova chat">
-                        <div class="contacts sidebar-contacts" v-for="(friend, i) in contacts">
+                        <div class="contacts sidebar-contacts" v-for="(friend, i) in contacts" @click="currentIndex = i">
                             <img :src="'img/avatar' + friend.avatar + '.jpg'" alt="friend.name 'profile-pic'">
                             <p>{{ friend.name}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="main">
-                    <div class="main-top">
+                    <div v-for="(contact, i) in contacts" class="main-top" v-if="currentIndex === i">
                         <div class="contacts">
-                            <img src="img/avatar_1.jpg" alt="my profile-pic">
+                            <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="contact.name 'profile-pic'">
                             <div>
-                                <p>Michele</p>
-                                <span>Ultimo accesso oggi alle</span>
+                                <p>{{ contact.name}}</p>
+                                <span>{{ contact.name}}</span>
                             </div>    
                         </div>
                         <div>
@@ -61,22 +61,10 @@
                         </div>
                     </div>
                     <div class="chat">
-                        <div class="message">
-                            <div class="my-message">
-                                <p>Hai portato a spasso il cane?</p>
-                                <span>10/01/2020 15:30:55</span>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <div class="my-message">
-                                <p>Ricordati di dargli da mangiare</p>
-                                <span>10/01/2020 15:50:00</span>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <div class="his-message">
-                                <p>Tutto fatto!</p>
-                                <span>10/01/2020 16:15:22</span>
+                        <div class="message" v-for="message in contacts[currentIndex].messages" >
+                            <div :class="message.status === 'sent' ? 'my-message' : 'his-message'">
+                                <p>{{message.text}}</p> 
+                                <span>{{message.date}}</span>
                             </div>
                         </div>
                     </div>
