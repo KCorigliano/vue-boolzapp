@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
+
 <body>
-    
+
     <div id="app">
         <div class="container">
             <!-- Backgound color-->
@@ -21,7 +24,7 @@
                 <div class="sidebar">
                     <div class="sidebar-top">
                         <div class="contacts">
-                            <img src="img/avatar_io.jpg" alt="my profile-pic">    
+                            <img src="img/avatar_io.jpg" alt="my profile-pic">
                             <p>Kevin Corigliano</p>
                         </div>
                         <div>
@@ -41,27 +44,45 @@
                             </div>
                         </div>
                         <!-- Filter input -->
-                        <input type="text"
-                        v-model="filter" 
-                        @keyup.enter="filterList" 
+                        <input type="text" 
+                        v-model="filterInput" 
+                        @keyup="filterList"
                         placeholder="Cerca o inizia una nuova chat"
                         >
                         <!-- Contact list -->
-                        <div class="contacts sidebar-contacts" :class="classes" v-for="(friend, i) in contacts" @click="currentIndex = i">
-                            <img :src="'img/avatar' + friend.avatar + '.jpg'" alt="friend.name 'profile-pic'">
-                            <p>{{ friend.name}}</p>
+                        <div v-if="filteredContacts.length>0">
+                            <div class="contacts sidebar-contacts" 
+                            v-for="(friend, i) in filteredContacts"
+                            @click="currentIndex = i"
+                            >
+                                <img :src="'img/avatar' + friend.avatar + '.jpg'" alt="friend.name 'profile-pic'">
+                                <p>{{ friend.name}}</p>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <div class="contacts sidebar-contacts" 
+                            v-for="(friend, i) in contacts"
+                            @click="currentIndex = i"
+                            >
+                                <img :src="'img/avatar' + friend.avatar + '.jpg'" alt="friend.name 'profile-pic'">
+                                <p>{{ friend.name}}</p>
+                            </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="main">
                     <!-- Top bar with selected contact info -->
-                    <div v-for="(contact, i) in contacts" class="main-top" v-if="currentIndex === i">
+                    <div v-for="(contact, i) in contacts" 
+                    class="main-top" 
+                    v-if="currentIndex === i"
+                    >
                         <div class="contacts">
                             <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="contact.name 'profile-pic'">
                             <div>
                                 <p>{{ contact.name}}</p>
                                 <span>Ultimo accesso il {{ lastMessage(currentIndex) }}</span>
-                            </div>    
+                            </div>
                         </div>
                         <div>
                             <i class="fas fa-search"></i>
@@ -71,13 +92,14 @@
                     </div>
                     <!-- Selected contact chat -->
                     <div class="chat">
-                        <div class="message" v-for="(message,index) in contacts[currentIndex].messages" >
-                            <div :class="message.status === 'sent' ? 'my-message' : 'his-message'" @click="hiddenMenuClick(currentIndex)">
+                        <div class="message" v-for="(message,index) in contacts[currentIndex].messages">
+                            <div :class="message.status === 'sent' ? 'my-message' : 'his-message'"
+                                @click="hiddenMenuClick(currentIndex)">
                                 <div class="hidden-menu" v-if="message.visible === false">
                                     <p>Message info</p>
                                     <p>Delete message</p>
                                 </div>
-                                <p>{{message.text}}</p> 
+                                <p>{{message.text}}</p>
                                 <span>{{message.date}}</span>
                             </div>
                         </div>
@@ -86,7 +108,11 @@
                         <div>
                             <i class="far fa-smile"></i>
                         </div>
-                        <input type="text" v-model="newMessage" @keyup.enter="sendNewMessage(currentIndex)" placeholder="Scrivi un messaggio">
+                        <input type="text" 
+                        v-model="newMessage" 
+                        @keyup.enter="sendNewMessage(currentIndex)"
+                        placeholder="Scrivi un messaggio"
+                        >
                         <div>
                             <i class="fas fa-microphone"></i>
                         </div>
@@ -97,4 +123,5 @@
     </div>
     <script src="js/script.js"></script>
 </body>
+
 </html>
