@@ -156,6 +156,7 @@ img{
 
 .message{
     display: flex;
+    position: relative;
 }
 
 .my-message{
@@ -208,4 +209,16 @@ img{
 
 .main-bottom i{
     cursor: pointer;
+}
+
+.hidden-menu{
+    position: absolute;
+    top: 50px;
+    background-color: white;
+    padding: 15px;
+    z-index: 1000;
+}
+
+.hidden{
+    display: none;
 }

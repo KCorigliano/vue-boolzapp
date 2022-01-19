@@ -13,8 +13,10 @@
     
     <div id="app">
         <div class="container">
+            <!-- Backgound color-->
             <div class="container-top"></div>
             <div class="container-bottom"></div>
+            <!-- /Backgoundcolor -->
             <div class="chat-container">
                 <div class="sidebar">
                     <div class="sidebar-top">
@@ -38,20 +40,27 @@
                                 <span>Attiva notifiche desktop</span>
                             </div>
                         </div>
-                        <input type="text" placeholder="Cerca o inizia una nuova chat">
-                        <div class="contacts sidebar-contacts" v-for="(friend, i) in contacts" @click="currentIndex = i">
+                        <!-- Filter input -->
+                        <input type="text"
+                        v-model="filter" 
+                        @keyup.enter="filterList" 
+                        placeholder="Cerca o inizia una nuova chat"
+                        >
+                        <!-- Contact list -->
+                        <div class="contacts sidebar-contacts" :class="classes" v-for="(friend, i) in contacts" @click="currentIndex = i">
                             <img :src="'img/avatar' + friend.avatar + '.jpg'" alt="friend.name 'profile-pic'">
                             <p>{{ friend.name}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="main">
+                    <!-- Top bar with selected contact info -->
                     <div v-for="(contact, i) in contacts" class="main-top" v-if="currentIndex === i">
                         <div class="contacts">
                             <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="contact.name 'profile-pic'">
                             <div>
                                 <p>{{ contact.name}}</p>
-                                <span>{{ contact.name}}</span>
+                                <span>Ultimo accesso il {{ lastMessage(currentIndex) }}</span>
                             </div>    
                         </div>
                         <div>
@@ -60,9 +69,14 @@
                             <i class="fas fa-ellipsis-v"></i>
                         </div>
                     </div>
+                    <!-- Selected contact chat -->
                     <div class="chat">
-                        <div class="message" v-for="message in contacts[currentIndex].messages" >
-                            <div :class="message.status === 'sent' ? 'my-message' : 'his-message'">
+                        <div class="message" v-for="(message,index) in contacts[currentIndex].messages" >
+                            <div :class="message.status === 'sent' ? 'my-message' : 'his-message'" @click="hiddenMenuClick(currentIndex)">
+                                <div class="hidden-menu" v-if="message.visible === false">
+                                    <p>Message info</p>
+                                    <p>Delete message</p>
+                                </div>
                                 <p>{{message.text}}</p> 
                                 <span>{{message.date}}</span>
                             </div>
@@ -72,7 +86,7 @@
                         <div>
                             <i class="far fa-smile"></i>
                         </div>
-                        <input type="text" placeholder="Scrivi un messaggio">
+                        <input type="text" v-model="newMessage" @keyup.enter="sendNewMessage(currentIndex)" placeholder="Scrivi un messaggio">
                         <div>
                             <i class="fas fa-microphone"></i>
                         </div>

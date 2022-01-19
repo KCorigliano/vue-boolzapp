@@ -86,10 +86,49 @@ new Vue({
                 ],
             },
         ], 
-
-        currentIndex: 0,        
+        currentIndex: 0, 
+        newMessage: '',  
+        hisNewNessage: '',   
+        filterInput: '',  
     },
     methods:{
-
-    }
+        sendNewMessage: function(currentIndex){
+            if (this.newMessage.length > 0){
+                const myNewNessage = {
+                    date: '19/01/2022 13:30:27',
+                    text: this.newMessage,
+                    status: 'sent'
+                }
+                this.contacts[currentIndex].messages.push(myNewNessage),
+                this.newMessage= '';
+                setTimeout(this.hisAnswere(currentIndex), 1000);
+            }
+        },
+        hisAnswere: function(currentIndex){
+            this.hisNewNessage = {
+                date: '19/01/2022 13:30:28',
+                text: 'Solo ora mi rispondi? Te la sei presa comoda!',
+                status: 'received'
+            }
+            this.contacts[currentIndex].messages.push(this.hisNewNessage);
+            this.newMessage='';
+        },
+        hiddenMenuClick: function(currentIndex){
+            this.contacts[currentIndex].visible=!this.contacts[currentIndex].visible;
+        },
+        lastMessage: function(currentIndex){
+            let lastData;
+            for (let i=0; i<this.contacts[currentIndex].messages.length; i++){
+                if (this.contacts[currentIndex].messages[i].status === 'received'){
+                    lastData = this.contacts[currentIndex].messages[i].date;
+                }
+            };
+            return lastData;
+        },
+        filterList: function(){
+           
+            const filtered = this.contacts.filter(el => el.name === filterInput);
+            console.log(filtered);               
+        },
+    },
 })
