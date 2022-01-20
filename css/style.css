@@ -159,57 +159,12 @@ img{
     position: relative;
 }
 
-.my-message{
-    margin: 10px 10px 10px auto;
-    background-color: #d5f9ba;
-    border-radius: 7px 0px 7px 7px;
-    width: auto;
-    padding: 15px;
-    cursor: pointer;
-}
-
-.his-message{
-    background-color: #ffffff;
-    border-radius: 0 7px 7px;
-    width: auto;
-    padding: 15px;
-    margin: 10px;
-    cursor: pointer;
-}
-
-.my-message span,
-.his-message span{
-    margin: 0 0 0 auto;
-    font-size: 10px;
-    color: grey;
-}
-
-.main-bottom{
-    background-color: rgba(200, 200, 200, 0.5);
-    backdrop-filter: blur(50px);
-    height: 50px;
+.message-text{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    bottom: 0;
-    padding: 0 15px;
 }
 
-.main-bottom input{
-    border: none;
-    border-radius: 5px;
-    height: 30px;
-    width: 80%;
-    padding: 5px;
-}
-
-.main-bottom div{
-    flex-grow: 1;
-    text-align: center;
-}
-
-.main-bottom i{
+.message-text i{
+    margin-left: 15px;
     cursor: pointer;
 }
 
@@ -239,6 +194,65 @@ img{
     background-color: #e9eaeb;
 }
 
-.hidden{
-    display: none;
+.sent{
+    margin: 10px 10px 10px auto;
+    background-color: #d5f9ba;
+    border-radius: 7px 0px 7px 7px;
+    width: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.received{
+    background-color: #ffffff;
+    border-radius: 0 7px 7px;
+    width: auto;
+    padding: 15px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sent span,
+.received span{
+    font-size: 10px;
+    color: grey;
+}
+
+.sent span{
+    margin: 0 0 0 auto;
+}
+
+.received span{
+    margin: 0 0 auto 0;
+}
+
+.main-bottom{
+    background-color: rgba(200, 200, 200, 0.5);
+    backdrop-filter: blur(50px);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    bottom: 0;
+    padding: 0 15px;
+}
+
+.main-bottom input{
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    width: 80%;
+    padding: 5px;
+}
+
+.main-bottom div{
+    flex-grow: 1;
+    text-align: center;
+}
+
+.main-bottom i{
+    cursor: pointer;
 }

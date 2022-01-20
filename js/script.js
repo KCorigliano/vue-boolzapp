@@ -101,55 +101,45 @@ new Vue({
     newMessage: "",
     hisNewNessage: "",
     filterInput: "",
-    filteredContacts: [],
-  },
-  methods: {
+  }, methods: {
     sendNewMessage: function (currentIndex) {
       if (this.newMessage.length > 0) {
         const myNewNessage = {
-          date: "19/01/2022 13:30:27",
+          date: this.currentDate(),
           text: this.newMessage,
           status: "sent",
+          submenu: false,
         };
         this.contacts[currentIndex].messages.push(myNewNessage),
-          (this.newMessage = "");
-        setTimeout(this.hisAnswere(currentIndex), 1000);
+        this.newMessage = "";
+        setTimeout(() => {
+          this.hisAnswere(currentIndex)}, 1000);
       }
     },
     hisAnswere: function (currentIndex) {
       this.hisNewNessage = {
-        date: "19/01/2022 13:30:28",
-        text: "Solo ora mi rispondi? Te la sei presa comoda!",
+        date: this.currentDate(),
+        text: "Solo ora mi rispondi? Sono passati due anni, te la sei presa comoda!",
         status: "received",
+        submenu: false,
       };
       this.contacts[currentIndex].messages.push(this.hisNewNessage);
       this.newMessage = "";
     },
-    hiddenMenuClick: function (currentIndex) {
-      this.contacts[currentIndex].visible =
-        !this.contacts[currentIndex].visible;
-    },
-    lastMessage: function (currentIndex) {
-      let lastData;
+    lastMessageDate: function (currentIndex) {
+      let lastDate;
       for (let i = 0; i < this.contacts[currentIndex].messages.length; i++) {
         if (this.contacts[currentIndex].messages[i].status === "received") {
-          lastData = this.contacts[currentIndex].messages[i].date;
+          lastDate = this.contacts[currentIndex].messages[i].date;
         }
       }
-      return lastData;
-    },
-    filterList: function () {
-      let filtered = [];
-      if (this.filterInput == "") {
-        this.filteredContacts = this.contacts;
-      } else {
-        filtered = this.contacts.filter((el) => el.name.startsWith(this.filterInput.toUpperCase() + this.filterInput.substring(1)));
-        this.filteredContacts = filtered;
-        console.log(filtered);
-      }
+      return lastDate;
     },
     deleteMessage: function(index, currentIndex){
         this.contacts[currentIndex].messages.splice(index, 1);
+    },
+    currentDate: function(){
+      return dayjs().format('DD/MM/YYYY HH:mm:ss');
     }
   },
 });

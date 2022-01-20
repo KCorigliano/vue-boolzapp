@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 
@@ -19,7 +19,7 @@
             <!-- Backgound color-->
             <div class="container-top"></div>
             <div class="container-bottom"></div>
-            <!-- /Backgoundcolor -->
+            <!-- /Backgroundcolor -->
             <div class="chat-container">
                 <div class="sidebar">
                     <div class="sidebar-top">
@@ -45,43 +45,32 @@
                         </div>
                         <!-- Filter input -->
                         <input type="text" 
-                        v-model="filterInput" 
-                        @keyup="filterList"
-                        placeholder="Cerca o inizia una nuova chat"
-                        >
-                        <!-- Contact list -->
-                        <div v-if="filteredContacts.length>0">
-                            <div class="contacts sidebar-contacts" 
-                            v-for="(friend, i) in filteredContacts"
-                            @click="currentIndex = i"
+                            v-model="filterInput" 
+                            placeholder="Cerca o inizia una nuova chat"
                             >
-                                <img :src="'img/avatar' + friend.avatar + '.jpg'" alt="friend.name 'profile-pic'">
-                                <p>{{ friend.name}}</p>
+                            <div class="sidebar-contacts" 
+                                v-for="(friend, i) in contacts"
+                                @click="currentIndex = i"
+                                >
+                                <div class="contacts" 
+                                    v-if="friend.name.toLowerCase().includes(filterInput)">
+                                    <img :src="'img/avatar' + friend.avatar + '.jpg'" alt="friend.name 'profile-pic'">
+                                    <p>{{ friend.name}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div v-else>
-                            <div class="contacts sidebar-contacts" 
-                            v-for="(friend, i) in contacts"
-                            @click="currentIndex = i"
-                            >
-                                <img :src="'img/avatar' + friend.avatar + '.jpg'" alt="friend.name 'profile-pic'">
-                                <p>{{ friend.name}}</p>
-                            </div>
-                        </div>
                     </div>
-
                 </div>
                 <div class="main">
                     <!-- Top bar with selected contact info -->
                     <div v-for="(contact, i) in contacts" 
-                    class="main-top" 
-                    v-if="currentIndex === i"
-                    >
+                        class="main-top" 
+                        v-if="currentIndex === i"
+                        >
                         <div class="contacts">
                             <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="contact.name 'profile-pic'">
                             <div>
                                 <p>{{ contact.name}}</p>
-                                <span>Ultimo accesso il {{ lastMessage(currentIndex) }}</span>
+                                <span>Ultimo accesso il {{ lastMessageDate(currentIndex) }}</span>
                             </div>
                         </div>
                         <div>
@@ -93,13 +82,16 @@
                     <!-- Selected contact chat -->
                     <div class="chat">
                         <div class="message" v-for="(message,index) in contacts[currentIndex].messages">
-                            <div :class="message.status === 'sent' ? 'my-message' : 'his-message'"
-                                @click="message.submenu=!message.submenu">
+                            <div :class="message.status"
+                                >
                                 <div class="hidden-menu" v-if="message.submenu === true">
                                     <p>Message info</p>
                                     <p @click="deleteMessage(index, currentIndex)">Delete message</p>
                                 </div>
-                                <p>{{message.text}}</p>
+                                <div class="message-text">
+                                    <p>{{message.text}}</p>
+                                    <i class="fas fa-angle-down" @click="message.submenu=!message.submenu"></i>
+                                </div>
                                 <span>{{message.date}}</span>
                             </div>
                         </div>
@@ -109,10 +101,10 @@
                             <i class="far fa-smile"></i>
                         </div>
                         <input type="text" 
-                        v-model="newMessage" 
-                        @keyup.enter="sendNewMessage(currentIndex)"
-                        placeholder="Scrivi un messaggio"
-                        >
+                            v-model="newMessage" 
+                            @keyup.enter="sendNewMessage(currentIndex)"
+                            placeholder="Scrivi un messaggio"
+                            >
                         <div>
                             <i class="fas fa-microphone"></i>
                         </div>
